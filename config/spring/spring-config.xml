@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    ">
+
+    <!--db配置文件路径-->
+    <context:property-placeholder location="classpath:db.properties"/>
+
+    <!--自动注入扫描包设置-->
+    <context:component-scan base-package="cn.yht"/>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!--对@Transactional这个注解进行的驱动，这是基于注解的方式使用事务配置声明-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--数据源配置-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
+        <property name="minPoolSize" value="${jdbc.minPoolSize}"/>
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+    </bean>
+
+    <!--SQLSessionFactory配置-->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="mybatis/SqlMapperConfig.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--自动扫描 将Mapper接口生成代理注入到Spring-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.yht.model.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"/>
+    </bean>
+</beans>

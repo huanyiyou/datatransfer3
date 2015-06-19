@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--别名设置，*Mapper.xml中可直接用类名首字母小写进行配置-->
+    <typeAliases>
+        <package name="cn.yht.model"/>
+    </typeAliases>
+</configuration>

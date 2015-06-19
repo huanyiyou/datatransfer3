@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yht.model.mapper.MdbPeriodicalMapper">
+
+    <resultMap id="mdbPeriodicalMap" type="mdbPeriodical">
+        <result property="no" column="序号"/>
+        <result property="originalName" column="刊名"/>
+        <result property="translatedName" column="外文刊名"/>
+        <result property="cycle" column="刊期"/>
+        <result property="dateIssued" column="出版年份"/>
+        <result property="organization" column="主办单位"/>
+        <result property="address" column="地址"/>
+        <result property="location" column="出版地"/>
+        <result property="zip" column="邮编"/>
+        <result property="postNo" column="邮发编号"/>
+        <result property="cn" column="CN"/>
+        <result property="issn" column="issn"/>
+        <result property="webUrl" column="网址"/>
+        <result property="remark" column="备注"/>
+        <result property="collection" column="馆藏卷期"/>
+        <result property="callno" column="馆藏号"/>
+        <result property="a463" column="a463"/>
+        <result property="km" column="km"/>
+        <result property="a905" column="a905"/>
+        <result property="pclass" column="class"/>
+        <result property="cna" column="cna"/>
+        <result property="city" column="city"/>
+        <result property="email" column="email"/>
+        <result property="telephone" column="telephone"/>
+        <result property="note2" column="note2"/>
+        <result property="userb" column="userb"/>
+        <result property="source" column="source"/>
+        <result property="reserve8" column="刊名拼音"/>
+    </resultMap>
+
+    <select id="getPeriodicalByMdb" parameterType="String" resultMap="mdbPeriodicalMap">
+        SELECT * FROM ${value} ORDER BY [序号]
+    </select>
+
+</mapper>

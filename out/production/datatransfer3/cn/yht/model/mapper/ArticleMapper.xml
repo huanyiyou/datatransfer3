@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yht.model.mapper.ArticleMapper">
+
+
+    <select id="getArticleMaxId" resultType="long">
+        SELECT ISNULL(MAX(a_id),0) FROM article
+    </select>
+
+    <insert id="insertArticle" parameterType="article">
+        INSERT INTO article (a_id,a_no,a_title,a_alternative,a_year_vol_page,a_year,a_abstract,a_periodical_name,a_name_in_title,a_keywords,
+        a_class,a_author_and_type,a_author,a_corporate_and_type,a_corporate,a_author_company,a_web_url,a_fund_project,a_callno,a_paper_callno,
+        a_microfiche_no,a_collection,fk_p_no,a_reserve_1,a_reserve_2,a_reserve_3,a_reserve_4,a_reserve_5,a_reserve_6,a_reserve_7,a_reserve_8,
+        a_reserve_9,a_reserve_10,a_reserve_11,a_reserve_12,a_reserve_13,a_reserve_14,a_reserve_15,a_reserve_16,a_reserve_17,a_reserve_18,
+        a_reserve_19,a_reserve_20,a_type,fk_db_id,create_date) VALUES (#{id},#{no},#{title},#{alternative},#{yearVolPage},#{year},#{aabstract},
+        #{periodicalName},#{nameInTitle},#{keywords},#{aclass},#{authorAndType},#{author},#{corporateAndType},#{corporate},#{authorCompany},#{webUrl}
+        ,#{fundProject},#{callno},#{paperCallno},#{microficheNo},#{collection},#{fkPNo},#{reserve1},#{reserve2},#{reserve3},#{reserve4},#{reserve5},
+        #{reserve6},#{reserve7},#{reserve8},#{reserve9},#{reserve10},#{reserve11},#{reserve12},#{reserve13},#{reserve14},#{reserve15},#{reserve16},
+        #{reserve17},#{reserve18},#{reserve19},#{reserve20},#{type},#{fkDbId},#{createDate})
+    </insert>
+    
+    <update id="replaceCR">
+        UPDATE [article] SET [a_abstract]=REPLACE(a_abstract,'vbCrLf','')
+    </update>
+
+    <update id="updateReserve4">
+        UPDATE article SET a_reserve_4=SUBSTRING(a_year_vol_page,charindex('b',a_year_vol_page)+1,charindex('/c',a_year_vol_page)-charindex('b',a_year_vol_page)-1) WHERE  a_year_vol_page LIKE '%.%'
+    </update>
+
+
+</mapper>

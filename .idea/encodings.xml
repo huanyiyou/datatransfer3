@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config/config.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/config/log4j.properties" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/config/mybatis/SqlMapperConfig.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lib/c3p0-0.9.5.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib/dom4j-1.6.1.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib/jaxen-1.1-beta-7.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib/mchange-commons-java-0.2.9.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib/mybatis-spring-1.2.2.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib/pinyin4j-2.5.0.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/cn/yht/common/Importer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/cn/yht/common/Transfer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/cn/yht/model/Article.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/cn/yht/model/Periodical.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/cn/yht/service/CommonService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/cn/yht/service/CommonServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/cn/yht/util/ChineseToSpell.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/cn/yht/util/XMLPaser.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

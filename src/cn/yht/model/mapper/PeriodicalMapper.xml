@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yht.model.mapper.PeriodicalMapper">
+    <resultMap id="periodicalViewMap" type="periodical">
+        <result property="id" column="p_v_id"/>
+        <result property="no" column="p_no"/>
+        <result property="originalName" column="p_original_name"/>
+        <result property="translatedName" column="p_translated_name"/>
+        <result property="originalNameSpell" column="p_original_name_spell"/>
+        <result property="level" column="p_level"/>
+        <result property="cycle" column="p_cycle"/>
+        <result property="dateIssued" column="p_date_issued"/>
+        <result property="organization" column="p_organization"/>
+        <result property="location" column="p_location"/>
+        <result property="address" column="p_address"/>
+        <result property="zip" column="p_zip"/>
+        <result property="cheifEditor" column="p_cheif_editor"/>
+        <result property="telephone" column="p_telephone"/>
+        <result property="email" column="p_email"/>
+        <result property="postNo" column="p_post_no"/>
+        <result property="cn" column="p_cn"/>
+        <result property="issn" column="p_issn"/>
+        <result property="webUrl" column="p_web_url"/>
+        <result property="remark" column="p_remark"/>
+        <result property="collection" column="p_collection"/>
+        <result property="language" column="p_language"/>
+        <result property="publishCountry" column="p_publish_country"/>
+        <result property="pclass" column="p_class"/>
+        <result property="callno" column="p_callno"/>
+        <result property="summary" column="p_summary"/>
+        <result property="reserve1" column="p_reserve_1"/>
+        <result property="reserve2" column="p_reserve_2"/>
+        <result property="reserve3" column="p_reserve_3"/>
+        <result property="reserve4" column="p_reserve_4"/>
+        <result property="reserve5" column="p_reserve_5"/>
+        <result property="reserve6" column="p_reserve_6"/>
+        <result property="reserve7" column="p_reserve_7"/>
+        <result property="reserve8" column="p_reserve_8"/>
+        <result property="reserve9" column="p_reserve_9"/>
+        <result property="reserve10" column="p_reserve_10"/>
+        <result property="reserve11" column="p_reserve_11"/>
+        <result property="reserve12" column="p_reserve_12"/>
+        <result property="reserve13" column="p_reserve_13"/>
+        <result property="reserve14" column="p_reserve_14"/>
+        <result property="reserve15" column="p_reserve_15"/>
+        <result property="reserve16" column="p_reserve_16"/>
+        <result property="reserve17" column="p_reserve_17"/>
+        <result property="reserve18" column="p_reserve_18"/>
+        <result property="reserve19" column="p_reserve_19"/>
+        <result property="reserve20" column="p_reserve_20"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="fk_db_id" column="fk_db_id"/>
+    </resultMap>
+    <resultMap id="periodicalMap" type="periodical">
+        <result property="id" column="p_id"/>
+        <result property="no" column="p_no"/>
+        <result property="originalName" column="p_original_name"/>
+        <result property="translatedName" column="p_translated_name"/>
+        <result property="originalNameSpell" column="p_original_name_spell"/>
+        <result property="level" column="p_level"/>
+        <result property="cycle" column="p_cycle"/>
+        <result property="dateIssued" column="p_date_issued"/>
+        <result property="organization" column="p_organization"/>
+        <result property="location" column="p_location"/>
+        <result property="address" column="p_address"/>
+        <result property="zip" column="p_zip"/>
+        <result property="cheifEditor" column="p_cheif_editor"/>
+        <result property="telephone" column="p_telephone"/>
+        <result property="email" column="p_email"/>
+        <result property="postNo" column="p_post_no"/>
+        <result property="cn" column="p_cn"/>
+        <result property="issn" column="p_issn"/>
+        <result property="webUrl" column="p_web_url"/>
+        <result property="remark" column="p_remark"/>
+        <result property="collection" column="p_collection"/>
+        <result property="language" column="p_language"/>
+        <result property="publishCountry" column="p_publish_country"/>
+        <result property="pclass" column="p_class"/>
+        <result property="callno" column="p_callno"/>
+        <result property="summary" column="p_summary"/>
+        <result property="reserve1" column="p_reserve_1"/>
+        <result property="reserve2" column="p_reserve_2"/>
+        <result property="reserve3" column="p_reserve_3"/>
+        <result property="reserve4" column="p_reserve_4"/>
+        <result property="reserve5" column="p_reserve_5"/>
+        <result property="reserve6" column="p_reserve_6"/>
+        <result property="reserve7" column="p_reserve_7"/>
+        <result property="reserve8" column="p_reserve_8"/>
+        <result property="reserve9" column="p_reserve_9"/>
+        <result property="reserve10" column="p_reserve_10"/>
+        <result property="reserve11" column="p_reserve_11"/>
+        <result property="reserve12" column="p_reserve_12"/>
+        <result property="reserve13" column="p_reserve_13"/>
+        <result property="reserve14" column="p_reserve_14"/>
+        <result property="reserve15" column="p_reserve_15"/>
+        <result property="reserve16" column="p_reserve_16"/>
+        <result property="reserve17" column="p_reserve_17"/>
+        <result property="reserve18" column="p_reserve_18"/>
+        <result property="reserve19" column="p_reserve_19"/>
+        <result property="reserve20" column="p_reserve_20"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="fkPVId" column="fk_p_v_id"/>
+    </resultMap>
+
+    <select id="getSamePVRecord" parameterType="periodical" resultMap="periodicalViewMap">
+        SELECT * FROM [periodical_view] WHERE [p_original_name] = #{originalName} AND [p_location] = #{location} AND p_reserve_4 != 1 AND p_reserve_4 != 2
+    </select>
+
+    <select id="getSamePRecord" resultType="periodical" resultMap="periodicalMap">
+      SELECT * FROM [periodical] WHERE  [p_reserve_18]=#{reserve18} AND  [p_no]=#{no} AND [p_original_name]=#{originalName}
+    </select>
+
+    <select id="getPVMaxId" resultType="long">
+        SELECT ISNULL(MAX(p_v_id),0) FROM periodical_view
+    </select>
+
+    <select id="getPMaxId" resultType="long">
+        SELECT ISNULL(MAX(p_id),0) FROM periodical
+    </select>
+
+    <insert id="insertPV" parameterType="periodical">
+        INSERT INTO periodical_view (p_v_id,p_no,p_original_name,p_original_name_spell,p_translated_name,p_level,p_cycle,p_date_issued,p_organization,p_location,p_address,p_zip,
+        p_cheif_editor,p_telephone,p_email,p_post_no,p_cn,p_issn,p_web_url,p_remark,p_collection,p_language, p_publish_country,p_class,p_callno,p_summary,p_reserve_1,p_reserve_2,
+        p_reserve_3,p_reserve_4,p_reserve_5,p_reserve_6,p_reserve_7,p_reserve_8,p_reserve_9,p_reserve_10,p_reserve_11,p_reserve_12,p_reserve_13,p_reserve_14,p_reserve_15,p_reserve_16,
+        p_reserve_17,p_reserve_18,p_reserve_19,p_reserve_20,create_date,fk_db_id ) VALUES
+        (#{id},#{no},#{originalName},#{originalNameSpell},#{translatedName},#{level},#{cycle},#{dateIssued},#{organization},#{location},#{address},#{zip},
+        #{cheifEditor},#{telephone},#{email},#{postNo},#{cn},#{issn},#{webUrl},#{remark},#{collection},#{language},#{publishCountry},#{pclass},#{callno},#{summary},#{reserve1},#{reserve2},
+        #{reserve3},#{reserve4},#{reserve5},#{reserve6},#{reserve7},#{reserve8},#{reserve9},#{reserve10},#{reserve11},#{reserve12},#{reserve13},#{reserve14},#{reserve15},#{reserve16},
+         #{reserve17},#{reserve18},#{reserve19},#{reserve20},#{createDate},#{fk_db_id})
+    </insert>
+    <update id="updatePV" parameterType="periodical">
+        UPDATE periodical_view SET p_no=#{no}, p_original_name=#{originalName}, p_original_name_spell=#{originalNameSpell}, p_translated_name=#{translatedName}, p_level=#{level}, p_cycle=#{cycle},
+        p_date_issued=#{dateIssued}, p_organization=#{organization}, p_location=#{location}, p_address=#{address}, p_zip=#{zip}, p_cheif_editor=#{cheifEditor}, p_telephone=#{telephone},p_email=#{email},
+        p_post_no=#{postNo},p_cn=#{cn},p_issn=#{issn},p_web_url=#{webUrl},p_remark=#{remark},p_collection=#{collection},p_language=#{language},p_publish_country=#{publishCountry},p_class=#{pclass},
+        p_callno=#{callno},p_summary=#{summary},p_reserve_1=#{reserve1},p_reserve_2=#{reserve2},p_reserve_3=#{reserve3},p_reserve_4=#{reserve4},p_reserve_5=#{reserve5},p_reserve_6=#{reserve6},p_reserve_7=#{reserve7},
+        p_reserve_8=#{reserve8},p_reserve_9=#{reserve9},p_reserve_10=#{reserve10},p_reserve_11=#{reserve11},p_reserve_12=#{reserve12},p_reserve_13=#{reserve13},p_reserve_14=#{reserve14},p_reserve_15=#{reserve15},
+        p_reserve_16=#{reserve16},p_reserve_17=#{reserve17},p_reserve_18=#{reserve18},p_reserve_19=#{reserve19},p_reserve_20=#{reserve20},create_date=#{createDate},fk_db_id=#{fk_db_id} WHERE p_v_id=#{fkPVId}
+    </update>
+
+    <insert id="insertPeriodical"  parameterType="periodical">
+        INSERT INTO periodical (p_id,p_no,p_original_name,p_original_name_spell,p_translated_name,p_level,p_cycle,p_date_issued,p_organization,p_location,p_address,p_zip,
+        p_cheif_editor,p_telephone,p_email,p_post_no,p_cn,p_issn,p_web_url,p_remark,p_collection,p_language, p_publish_country,p_class,p_callno,p_summary,fk_p_v_id,p_reserve_1,p_reserve_2,
+        p_reserve_3,p_reserve_4,p_reserve_5,p_reserve_6,p_reserve_7,p_reserve_8,p_reserve_9,p_reserve_10,p_reserve_11,p_reserve_12,p_reserve_13,p_reserve_14,p_reserve_15,p_reserve_16,
+        p_reserve_17,p_reserve_18,p_reserve_19,p_reserve_20,create_date ) VALUES
+        (#{id},#{no},#{originalName},#{originalNameSpell},#{translatedName},#{level},#{cycle},#{dateIssued},#{organization},#{location},#{address},#{zip},
+        #{cheifEditor},#{telephone},#{email},#{postNo},#{cn},#{issn},#{webUrl},#{remark},#{collection},#{language},#{publishCountry},#{pclass},#{callno},#{summary},#{fkPVId},#{reserve1},#{reserve2},
+        #{reserve3},#{reserve4},#{reserve5},#{reserve6},#{reserve7},#{reserve8},#{reserve9},#{reserve10},#{reserve11},#{reserve12},#{reserve13},#{reserve14},#{reserve15},#{reserve16},
+         #{reserve17},#{reserve18},#{reserve19},#{reserve20},#{createDate})
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<demo>
+    <config>
+        <!-- 导入数据库类型类型 -->
+        <transferType>篇名科技</transferType>
+        <!-- 刊名库文件名 -->
+        <periodicalName>mkq_18w</periodicalName>
+        <!-- 篇名库文件名 -->
+        <articleName>mk14_18wa</articleName>
+        <!-- base_database 表参数  -->
+        <dbId>10</dbId>
+        <!--2015.06 新增字段fk_db_id，产品标记字段，对应periodical_view的fk_db_id-->
+        <fk_db_id></fk_db_id>
+    </config>
+</demo>
