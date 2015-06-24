@@ -107,7 +107,7 @@
     </resultMap>
 
     <select id="getSamePVRecord" parameterType="periodical" resultMap="periodicalViewMap">
-        SELECT * FROM [periodical_view] WHERE [p_original_name] = #{originalName} AND [p_location] = #{location} AND p_reserve_4 != 1 AND p_reserve_4 != 2
+        SELECT * FROM [periodical_view] WHERE [p_original_name] = #{originalName} AND [p_location] = #{location} AND p_reserve_4 != 1
     </select>
 
     <select id="getSamePRecord" resultType="periodical" resultMap="periodicalMap">
@@ -128,7 +128,7 @@
         p_reserve_3,p_reserve_4,p_reserve_5,p_reserve_6,p_reserve_7,p_reserve_8,p_reserve_9,p_reserve_10,p_reserve_11,p_reserve_12,p_reserve_13,p_reserve_14,p_reserve_15,p_reserve_16,
         p_reserve_17,p_reserve_18,p_reserve_19,p_reserve_20,create_date,fk_db_id ) VALUES
         (#{id},#{no},#{originalName},#{originalNameSpell},#{translatedName},#{level},#{cycle},#{dateIssued},#{organization},#{location},#{address},#{zip},
-        #{cheifEditor},#{telephone},#{email},#{postNo},#{cn},#{issn},#{webUrl},#{remark},#{collection},#{language},#{publishCountry},#{pclass},#{callno},#{summary},#{reserve1},#{reserve2},
+        #{cheifEditor},#{telephone},#{email},#{postNo},#{cn},#{issn},#{webUrl},#{remark},#{collection},#{language},#{publishCountry},#{pclass},#{callno},#{summary,jdbcType=LONGVARCHAR},#{reserve1},#{reserve2},
         #{reserve3},#{reserve4},#{reserve5},#{reserve6},#{reserve7},#{reserve8},#{reserve9},#{reserve10},#{reserve11},#{reserve12},#{reserve13},#{reserve14},#{reserve15},#{reserve16},
          #{reserve17},#{reserve18},#{reserve19},#{reserve20},#{createDate},#{fk_db_id})
     </insert>
@@ -136,9 +136,9 @@
         UPDATE periodical_view SET p_no=#{no}, p_original_name=#{originalName}, p_original_name_spell=#{originalNameSpell}, p_translated_name=#{translatedName}, p_level=#{level}, p_cycle=#{cycle},
         p_date_issued=#{dateIssued}, p_organization=#{organization}, p_location=#{location}, p_address=#{address}, p_zip=#{zip}, p_cheif_editor=#{cheifEditor}, p_telephone=#{telephone},p_email=#{email},
         p_post_no=#{postNo},p_cn=#{cn},p_issn=#{issn},p_web_url=#{webUrl},p_remark=#{remark},p_collection=#{collection},p_language=#{language},p_publish_country=#{publishCountry},p_class=#{pclass},
-        p_callno=#{callno},p_summary=#{summary},p_reserve_1=#{reserve1},p_reserve_2=#{reserve2},p_reserve_3=#{reserve3},p_reserve_4=#{reserve4},p_reserve_5=#{reserve5},p_reserve_6=#{reserve6},p_reserve_7=#{reserve7},
+        p_callno=#{callno},p_summary=#{summary,jdbcType=LONGVARCHAR},p_reserve_1=#{reserve1},p_reserve_2=#{reserve2},p_reserve_3=#{reserve3},p_reserve_4=#{reserve4},p_reserve_5=#{reserve5},p_reserve_6=#{reserve6},p_reserve_7=#{reserve7},
         p_reserve_8=#{reserve8},p_reserve_9=#{reserve9},p_reserve_10=#{reserve10},p_reserve_11=#{reserve11},p_reserve_12=#{reserve12},p_reserve_13=#{reserve13},p_reserve_14=#{reserve14},p_reserve_15=#{reserve15},
-        p_reserve_16=#{reserve16},p_reserve_17=#{reserve17},p_reserve_18=#{reserve18},p_reserve_19=#{reserve19},p_reserve_20=#{reserve20},create_date=#{createDate},fk_db_id=#{fk_db_id} WHERE p_v_id=#{fkPVId}
+        p_reserve_16=#{reserve16},p_reserve_17=#{reserve17},p_reserve_18=#{reserve18},p_reserve_19=#{reserve19},p_reserve_20=#{reserve20},update_date=#{updateDate},fk_db_id=#{fk_db_id} WHERE p_v_id=#{fkPVId}
     </update>
 
     <insert id="insertPeriodical"  parameterType="periodical">
@@ -147,9 +147,9 @@
         p_reserve_3,p_reserve_4,p_reserve_5,p_reserve_6,p_reserve_7,p_reserve_8,p_reserve_9,p_reserve_10,p_reserve_11,p_reserve_12,p_reserve_13,p_reserve_14,p_reserve_15,p_reserve_16,
         p_reserve_17,p_reserve_18,p_reserve_19,p_reserve_20,create_date ) VALUES
         (#{id},#{no},#{originalName},#{originalNameSpell},#{translatedName},#{level},#{cycle},#{dateIssued},#{organization},#{location},#{address},#{zip},
-        #{cheifEditor},#{telephone},#{email},#{postNo},#{cn},#{issn},#{webUrl},#{remark},#{collection},#{language},#{publishCountry},#{pclass},#{callno},#{summary},#{fkPVId},#{reserve1},#{reserve2},
+        #{cheifEditor},#{telephone},#{email},#{postNo},#{cn},#{issn},#{webUrl},#{remark,jdbcType=LONGVARCHAR},#{collection},#{language},#{publishCountry},#{pclass},#{callno},#{summary,jdbcType=LONGVARCHAR},#{fkPVId},#{reserve1},#{reserve2},
         #{reserve3},#{reserve4},#{reserve5},#{reserve6},#{reserve7},#{reserve8},#{reserve9},#{reserve10},#{reserve11},#{reserve12},#{reserve13},#{reserve14},#{reserve15},#{reserve16},
-         #{reserve17},#{reserve18},#{reserve19},#{reserve20},#{createDate})
+         #{reserve17},#{pReserve18},#{reserve19},#{reserve20},#{createDate})
     </insert>
 
 

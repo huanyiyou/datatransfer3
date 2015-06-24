@@ -22,15 +22,16 @@ public class Importer {
         //获取需导入的刊名表数据
         List<MdbPeriodical> mdbPeriodicals = commonService.getPeriodicalByMdb(Transfer.hashMapConfig.get("periodicalName"));
         List<Periodical> periodicals = MdbPeriodicalUtil.mdbToPeriodicals(mdbPeriodicals);
-        if(1 == 0){
+//        if(1 == 0){
         //检查本次periodicals中是否在periodical_view表中有重复记录
-//        List<Periodical> samePeriodicalList = commonService.getViewSameList(periodicals);
-//        if (samePeriodicalList.size() > 0) {
-//            //若相同记录数大于1则将该条记录的
-//            System.out.println("periodical_view有重复记录，共" + samePeriodicalList.size() + "条");
-//            for (Periodical periodical : samePeriodicalList) {
-//                writerTxt(periodical.getOriginalName() + "  " + periodical.getLocation());
-//            }
+        List<Periodical> samePeriodicalList = commonService.getViewSameList(periodicals);
+        if (samePeriodicalList.size() > 0) {
+            //若相同记录数大于1则将该条记录的
+            Transfer.logger.info("periodical_view有重复记录，共" + samePeriodicalList.size() + "条");
+            Transfer.logger.info("具体重复记录详见文件：D://periodical_view重复列表yyyyMMdd.txt");
+            for (Periodical periodical : samePeriodicalList) {
+                writerTxt(periodical.getOriginalName() + "  " + periodical.getLocation());
+            }
         } else {
             int insertArticleCount = 0;
             int insertPeriodicalCount = 0;
@@ -40,20 +41,21 @@ public class Importer {
             //若相同记录数没有大于1的记录，则遍历periodicals.getPeriodicalList()判断是否是重复记录
             for (Periodical periodical : periodicals) {
                 periodical.setReserve18(Transfer.dbId);
+                periodical.setpReserve18(Long.parseLong(Transfer.dbId));
                 //periodical_view表
                 if (null == commonService.getSamePVRecord(periodical)) {
                     periodical.setId(commonService.getPVMaxId()+1);
                     periodical.setFkPVId(periodical.getId());
                     insertPeriodicalView(periodical);
                     insertPeriodicalViewCount++;
-                    System.out.println("新增periodical_view："+periodical.getOriginalName());
+                    Transfer.logger.info("新增periodical_view：序号" + periodical.getNo() +"|"+ periodical.getOriginalName());
                 } else {
                     Periodical samePeriodical = commonService.getSamePVRecord(periodical);
                     periodical.setId(samePeriodical.getId());
                     periodical.setFkPVId(samePeriodical.getId());
                     updatePeriodicalView(periodical, samePeriodical);
                     updatePeriodicalViewCount++;
-                    System.out.println("更新periodical_view："+periodical.getOriginalName());
+                    Transfer.logger.info("更新periodical_view：序号" +periodical.getNo() +"|"+ periodical.getOriginalName());
                 }
 
                 //periodical表
@@ -61,7 +63,7 @@ public class Importer {
                     periodical.setId(commonService.getPMaxId() + 1);
                     insertPeriodical(periodical);
                     insertPeriodicalCount++;
-                    System.out.println("新增periodical："+periodical.getOriginalName());
+                    Transfer.logger.info("新增periodical：序号" + periodical.getNo() +"|"+periodical.getOriginalName());
                 } else {
                     Periodical samePeriodical = commonService.getSamePRecorcd(periodical);
                     periodical.setId(samePeriodical.getId());
@@ -74,18 +76,17 @@ public class Importer {
                     if(null != article){
                         insertArticle(article, periodical);
                         insertArticleCount++;
-                        System.out.println("新增article："+article.getTitle());
+                        Transfer.logger.info("新增article：第" +insertArticleCount + "篇|" + article.getTitle());
                     }
                 }
-                commonService.replaceCR();
-                commonService.updateReserve4();
-
-                System.out.println("共新增periodical_view："+updatePeriodicalViewCount+"篇");
-                System.out.println("共更新periodical_view："+insertPeriodicalViewCount+"篇");
-                System.out.println("共新增periodical："+insertPeriodicalCount+"篇");
-
-                System.out.println("一共导入："+insertArticleCount+"篇article");
             }
+            commonService.replaceCR();
+            commonService.updateReserve4();
+            Transfer.logger.info("共新增periodical_view：" + updatePeriodicalViewCount + "篇");
+            Transfer.logger.info("共更新periodical_view：" + insertPeriodicalViewCount + "篇");
+            Transfer.logger.info("共新增periodical：" + insertPeriodicalCount + "篇");
+
+            Transfer.logger.info("一共导入：" + insertArticleCount + "篇article");
         }
     }
 
@@ -157,12 +158,14 @@ public class Importer {
             fw.newLine();
             fw.flush(); // 全部写入缓存中的内容
         } catch (Exception e) {
+            Transfer.logger.error(e.toString());
             e.printStackTrace();
         } finally {
             if (fw != null) {
                 try {
                     fw.close();
                 } catch (IOException e) {
+                    Transfer.logger.error(e.toString());
                     e.printStackTrace();
                 }
             }

@@ -139,7 +139,7 @@ public class Periodical implements Serializable {
     private String reserve17;
 
     /** identifier field */
-    private long reserve18;
+    private String reserve18;
 
     /** identifier field */
     private String reserve19;
@@ -155,6 +155,9 @@ public class Periodical implements Serializable {
 
 
     private String updateDate;
+
+    //periodical表18字段为bigint，故而新增该字段以适应数据类型
+    private Long pReserve18;
 
     public long getId() {
         return id;
@@ -508,11 +511,11 @@ public class Periodical implements Serializable {
         this.reserve17 = reserve17;
     }
 
-    public long getReserve18() {
+    public String getReserve18() {
         return reserve18;
     }
 
-    public void setReserve18(long reserve18) {
+    public void setReserve18(String reserve18) {
         this.reserve18 = reserve18;
     }
 
@@ -554,5 +557,13 @@ public class Periodical implements Serializable {
 
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public Long getpReserve18() {
+        return pReserve18;
+    }
+
+    public void setpReserve18(Long pReserve18) {
+        this.pReserve18 = pReserve18;
     }
 }

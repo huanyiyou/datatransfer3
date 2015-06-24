@@ -28,7 +28,7 @@ public class MdbArticleUtil {
         article.setAuthor(addThreeSlashes(str701));
         article.setCorporate(addThreeSlashes(str711));
         article.setFundProject(replacePreBySlash(mdbArticle.getM900_a()));
-        article.setFkDbId(Transfer.dbId);
+        article.setFkDbId(Long.parseLong(Transfer.dbId));
         article.setType(Transfer.transferType);
         article.setReserve1(mdbArticle.getM250_a());
         article.setReserve2(mdbArticle.getM250_d());
